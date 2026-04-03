@@ -1,126 +1,117 @@
 <p align="center">
-  <div align="center">
-    <a href="https://justanime.to">
-      <img alt="JustAnime" src="https://github.com/JustAnimeCore/JustAnime/blob/main/public/footer.png" width="220"/>
-    </a>
-  </div>
-    <h3 align="center">JustAnime - Clean anime streaming platform</h3>
-    <p align="center">
-  <a href="https://github.com/JustAnimeCore/JustAnime">
-      <img src="https://img.shields.io/github/stars/JustAnimeCore/JustAnime" alt="Github Stars">
-    </a>
-      <img src="https://img.shields.io/github/issues/JustAnimeCore/JustAnime" alt="Github Issues">
-     <a href="https://github.com/JustAnimeCore/JustAnime">
-      <img src="https://img.shields.io/github/forks/JustAnimeCore/JustAnime" alt="Github Forks" />
-    </a>
+  <img src="src/app/favicon.ico" alt="Anirohi Logo" width="80" height="80" />
 </p>
-</p>
-<p align="center">
-    <a href="https://justanime.to">JustAnime</a> is an open-source anime streaming service that uses <a href="https://github.com/JustAnimeCore/HiAnime-Api">HiAnime-Api</a>, built using ReactJS with javascript and Tailwind CSS. It lets you easily find any anime with intuitive search & suggestion feature and stream without any ads.
- </p>
+
+<h1 align="center">Anirohi</h1>
 
 <p align="center">
-  <a href="https://discord.gg/P3yqksmGun">
-    <img src="https://img.shields.io/badge/Join%20our%20Discord-5865F2?logo=discord&logoColor=white" alt="Join our Discord">
+  <strong>Stream anime. No interruptions.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/noelrohi/anirohi/stargazers">
+    <img src="https://img.shields.io/github/stars/noelrohi/anirohi?style=flat&color=06b6d4" alt="GitHub Stars" />
   </a>
-  <a href="https://t.me/JustAnimeZone">
-    <img src="https://img.shields.io/badge/Join%20our%20Telegram-26A5E4?logo=telegram&logoColor=white" alt="Join our Telegram">
+  <a href="https://github.com/noelrohi/anirohi/network/members">
+    <img src="https://img.shields.io/github/forks/noelrohi/anirohi?style=flat&color=06b6d4" alt="GitHub Forks" />
   </a>
-  <a href="https://www.instagram.com/watchjustanime">
-    <img src="https://img.shields.io/badge/Follow%20on%20Instagram-E4405F?logo=instagram&logoColor=white" alt="Follow on Instagram">
+  <a href="https://github.com/noelrohi/anirohi/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/noelrohi/anirohi?style=flat&color=06b6d4" alt="License" />
   </a>
 </p>
 
-<details>
-<summary>View more Features</summary>
+<p align="center">
+  <img src="src/app/opengraph-image.png" alt="Anirohi Screenshot" width="100%" />
+</p>
 
-### General
+## Features
 
-- Sub Anime support
-- Dub Anime support
-- User-friendly interface
-- Mobile responsive
-- Fast page load
-- Character & Voice Actors
+- **Clean UI** — Minimalist design focused on content
+- **Fast Search** — Quick anime discovery with command menu (⌘K)
+- **Trending** — Stay updated with currently popular anime
+- **Schedule** — Track upcoming episode releases
+- **PWA Support** — Install as a native app on any device
 
-### Watch Page
+## Tech Stack
 
-- Related Animes
-- Recommended Animes
-- Available seasons
-- Estimated schedule of upcoming episodes
-- **Player**
-  - Autoplay
-  - Autoskip intro/outro
-  - Autonext
+- [Next.js 15](https://nextjs.org/) — React framework with App Router
+- [React 19](https://react.dev/) — UI library with React Compiler
+- [Tailwind CSS v4](https://tailwindcss.com/) — Utility-first styling
+- [shadcn/ui](https://ui.shadcn.com/) — Accessible component primitives
+- [oRPC](https://orpc.dev/) — End-to-end typesafe APIs
+- [TanStack Query](https://tanstack.com/query) — Async state management
+- [Aniwatch API](https://github.com/ghoshRitesh12/aniwatch-api) — Anime data provider
 
-</details>
+## Getting Started
 
-## Previews
+### Prerequisites
 
-<div style="text-align: left;">
-  <img src="https://github.com/JustAnimeCore/JustAnime/blob/main/public/home.PNG" alt="Home Page" style="max-width: 80%;" >
-  <details>
-  <summary style="margin-top:10px">View more screenshots</summary>
-  <br/>
-  AnimeInfo Page
-  <img src="https://github.com/JustAnimeCore/JustAnime/blob/main/public/info.PNG" style="margin-top:10px" src="" alt="AnimeInfo Page" style="max-width: 80%;">
-  <br/>
-  Character & Voice Actors
-  <img src="https://github.com/JustAnimeCore/JustAnime/blob/main/public/char.PNG" style="margin-top:10px" src="" alt="Character & Voice Actors" style="max-width: 80%;">
-  <br/>
-  Watch Page
-  <img src="https://github.com/JustAnimeCore/JustAnime/blob/main/public/watch.PNG" style="margin-top:10px" src="" alt="Watch Page" style="max-width: 80%;">
-  <br/>
-  </details>
-</div>
+- [Bun](https://bun.sh/) (recommended) or Node.js 18+
 
-## Installation and Local Development
-
-### 1. Make sure you have node installed on your device
-
-### 2. Run the following code to clone the repository and install all required dependencies
+### Installation
 
 ```bash
-git clone https://github.com/JustAnimeCore/JustAnime.git
-cd JustAnime
-npm install # or yarn
+# Clone the repository
+git clone https://github.com/noelrohi/anirohi.git
+cd anirohi
+
+# Install dependencies
+bun install
+
+# Set up environment variables
+cp .env.example .env.local
 ```
 
-### 3. Refer the <a href="https://github.com/JustAnimeCore/JustAnime/blob/main/.env.example">.env.example</a> to set your .env file up
+### Environment Variables
 
-## Start the server
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_PROXY_URL` | Yes | URL of the [m3u8proxy](https://github.com/noelrohi/m3u8proxy) Cloudflare Worker |
+
+### Running
 
 ```bash
-npm start # or npm run dev (to run develepment server)
+# Start development server
+bun dev
 ```
-## Live Deployment
 
-### Vercel
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-Host your own instance of <a href="https://justanime.fun">JustAnime</a>  on vercel
+### Commands
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/JustAnimeCore/JustAnime)
+```bash
+bun dev       # Start development server
+bun build     # Build for production
+bun start     # Start production server
+bun lint      # Run ESLint
+```
 
-### Render
+## Star History
 
-Host your own instance of <a href="https://justanime.fun">JustAnime</a> on Render.
+<a href="https://star-history.com/#noelrohi/anirohi&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=noelrohi/anirohi&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=noelrohi/anirohi&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=noelrohi/anirohi&type=Date" />
+ </picture>
+</a>
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/JustAnimeCore/JustAnime)
+## Contributing
 
-## Pull Requests
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-- Pull requests are welcomed that address bug fixes, improvements, or new features.
-- Fork the repository and create a new branch for your changes.
-- Ensure your code follows our coding standards.
-- Include tests if applicable.
-- Describe your changes clearly in the pull request, explaining the problem and solution.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
- ### Reporting Issues
+## License
 
-If you discover any issues or have suggestions for improvement, please open an issue. Provide a clear and concise description of the problem, steps to reproduce it, and any relevant information about your environment.
+This project is open source and available under the [MIT License](LICENSE).
 
+---
 
-<h2 align="center">
-  <b>Enjoy streaming anime the way it should be! 🍿</b>
-</h2>
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/noelrohi">noelrohi</a>
+</p>
