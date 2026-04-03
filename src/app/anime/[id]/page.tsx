@@ -54,10 +54,8 @@ export default function AnimeDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const info = anime.info;
-  const moreInfo = anime.moreInfo;
 
-  if (!info.poster || !info.name) {
+  if (!anime.images || !anime.title) {
     notFound();
   }
 
@@ -69,8 +67,8 @@ export default function AnimeDetailPage({ params }: PageProps) {
       <section className="relative pt-14">
         <div className="relative h-[50vh] overflow-hidden">
           <Image
-            src={info.poster}
-            alt={info.name}
+            src={anime.images.webp.large_image_url}
+            alt={anime.title_english}
             fill
             className="object-cover blur-sm scale-105"
             priority
@@ -84,8 +82,8 @@ export default function AnimeDetailPage({ params }: PageProps) {
             {/* Cover */}
             <div className="relative w-40 md:w-52 aspect-3/4 rounded-lg overflow-hidden shadow-xl shrink-0">
               <Image
-                src={info.poster}
-                alt={info.name}
+                src={anime.images.webp.large_image_url}
+                alt={anime.title_english}
                 fill
                 className="object-cover"
                 priority
@@ -95,33 +93,32 @@ export default function AnimeDetailPage({ params }: PageProps) {
             {/* Details */}
             <div className="flex-1 pt-4 md:pt-20">
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
-                {moreInfo.type || info.stats?.type} · {moreInfo.status} ·{" "}
-                {typeof moreInfo.aired === "string"
-                  ? moreInfo.aired.split(" to ")[0]
-                  : moreInfo.aired?.[0]}
+                {anime.type} · {anime.status} ·{" "}
+                {typeof anime.aired === "string"
+                  ? anime.aired.split(" to ")[0]
+                  : typeof anime.aired === "object" && anime.aired?.prop?.from?.year
+                  ? anime.aired.prop.from.year
+                  : anime.aired?.[0]}
               </p>
 
               <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground mb-2">
-                {info.name}
+                {anime.title_english}
               </h1>
 
-              {moreInfo.japanese && (
+              {anime.title && (
                 <p className="text-sm text-muted-foreground/60 mb-4">
-                  {moreInfo.japanese}
+                  {anime.title}
                 </p>
               )}
 
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
-                {info.stats?.episodes?.sub && (
-                  <span>{info.stats.episodes.sub} episodes (Sub)</span>
+                {anime.episodes && (
+                  <span>{anime.episodes} episodes</span>
                 )}
-                {info.stats?.episodes?.dub && (
-                  <span>{info.stats.episodes.dub} episodes (Dub)</span>
-                )}
-                {moreInfo.duration && <span>{moreInfo.duration}</span>}
-                {moreInfo.studios && <span>{moreInfo.studios}</span>}
-                {info.stats?.rating && (
-                  <span className="text-yellow-500">{info.stats.rating}</span>
+                {anime.duration && <span>{anime.duration}</span>}
+                {anime.studios[0]?.name && <span>{anime.studios[0].name}</span>}
+                {anime.rating && (
+                  <span className="text-yellow-500">{anime.rating}</span>
                 )}
               </div>
 
@@ -149,8 +146,8 @@ export default function AnimeDetailPage({ params }: PageProps) {
                   onClick={() => {
                     const wasSaved = toggleSave({
                       id,
-                      name: info.name!,
-                      poster: info.poster!,
+                      name: anime.title_english!,
+                      poster: anime.images.webp.large_image_url!,
                     });
                     toast(wasSaved ? "Added to saved" : "Removed from saved");
                   }}
@@ -173,14 +170,14 @@ export default function AnimeDetailPage({ params }: PageProps) {
                 </button>
               </div>
 
-              {Array.isArray(moreInfo.genres) && (
+              {Array.isArray(anime.genres) && (
                 <div className="flex flex-wrap gap-2">
-                  {moreInfo.genres.map((genre) => (
+                  {anime.genres.map((genre) => (
                     <span
-                      key={genre}
+                      key={genre.name}
                       className="px-3 py-1 rounded-full bg-foreground/5 text-xs text-muted-foreground"
                     >
-                      {genre}
+                      {genre.name}
                     </span>
                   ))}
                 </div>
@@ -202,7 +199,7 @@ export default function AnimeDetailPage({ params }: PageProps) {
                   Synopsis
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  {info.description || "No description available."}
+                  {anime.synopsis || "No description available."}
                 </p>
               </div>
             </div>
@@ -214,52 +211,50 @@ export default function AnimeDetailPage({ params }: PageProps) {
                   Information
                 </h3>
                 <dl className="space-y-3 text-sm">
-                  {moreInfo.type && (
+                  {anime.type && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">Type</dt>
-                      <dd>{moreInfo.type}</dd>
+                      <dd>{anime.type}</dd>
                     </div>
                   )}
-                  {info.stats?.episodes && (
+                  {anime.episodes && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">Episodes</dt>
                       <dd>
-                        {info.stats.episodes.sub ||
-                          info.stats.episodes.dub ||
-                          "?"}
+                        {anime.episodes}
                       </dd>
                     </div>
                   )}
-                  {moreInfo.status && (
+                  {anime.status && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">Status</dt>
-                      <dd>{moreInfo.status}</dd>
+                      <dd>{anime.status}</dd>
                     </div>
                   )}
-                  {moreInfo.aired && (
+                  {anime.aired.string && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">Aired</dt>
                       <dd className="text-right max-w-32 truncate">
-                        {moreInfo.aired}
+                        {anime.aired.string}
                       </dd>
                     </div>
                   )}
-                  {moreInfo.duration && (
+                  {anime.duration && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">Duration</dt>
-                      <dd>{moreInfo.duration}</dd>
+                      <dd>{anime.duration}</dd>
                     </div>
                   )}
-                  {moreInfo.studios && (
+                  {anime.studios && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">Studio</dt>
-                      <dd>{moreInfo.studios}</dd>
+                      <dd>{anime.studios[0]?.name}</dd>
                     </div>
                   )}
-                  {moreInfo.malscore && (
+                  {anime.score && (
                     <div className="flex justify-between">
                       <dt className="text-muted-foreground/60">MAL Score</dt>
-                      <dd>{moreInfo.malscore}</dd>
+                      <dd>{anime.score}</dd>
                     </div>
                   )}
                 </dl>

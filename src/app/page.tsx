@@ -38,12 +38,16 @@ export default function LandingPage() {
       (item) =>
         item.mal_id !== null &&
         item.title !== null &&
-        item.images.webp.large_image_url !== null,
+        item.images.webp.large_image_url !== null &&
+        item.type !== null &&
+        item.duration !== null
     )
     .map((item) => ({
       id: item.mal_id.toString(),
       name: item.title,
       poster: item.images.webp.large_image_url,
+      type: item.type,
+      duration: item.duration,
     }));;
   const isSearching = searchQuery.length >= 2;
 
